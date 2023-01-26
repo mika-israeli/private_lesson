@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="main_btn_1" type="id" />
+    <item name="main_frag_container" type="id" />
+    <item name="main_btn_3" type="id" />
+    <item name="main_btn_2" type="id" />
+    <item name="main_btn_4" type="id" />
+</resources>

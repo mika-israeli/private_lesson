@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/postsListFragment">
+
+    <fragment
+        android:id="@+id/postsListFragment"
+        android:name="com.example.private_lesson.PostListFragment"
+        android:label="Search teacher"
+        tools:layout="@layout/fragment_post_list">
+        <action
+            android:id="@+id/action_postListFragment_to_blueFragment"
+            app:destination="@id/blueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/blueFragment"
+        android:name="com.example.private_lesson.BlueFragment"
+        android:label="fragment_blue"
+        tools:layout="@layout/fragment_blue" >
+        <argument
+            android:name="blueTitle"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.example.private_lesson.AddPostFragment"
+        android:label="Add lesson"
+        tools:layout="@layout/fragment_add_post" />
+    <action android:id="@+id/action_global_addPostFragment" app:destination="@id/addPostFragment" />
+    <action android:id="@+id/action_global_addPostFragment2" app:destination="@id/addPostFragment" />
+</navigation>
