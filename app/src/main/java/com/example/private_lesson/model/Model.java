@@ -1,9 +1,19 @@
 package com.example.private_lesson.model;
+import android.os.Handler;
+import android.os.Looper;
 
-import java.util.LinkedList;
+import androidx.core.os.HandlerCompat;
+
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 
 public class Model {
+    private Executor executor = Executors.newSingleThreadExecutor();
+    private Handler mainHandler = HandlerCompat.createAsync(Looper.getMainLooper());
+
+
 
     private static final Model _instance = new Model();
 
@@ -11,19 +21,45 @@ public class Model {
         return _instance;
     }
     private Model() {
-        for(int i = 0; i < 10; i++) {
-          addPost(new Post("teacherName" + i, "description" + i, "price" + i, "id" + i, false));
-        }
+
+
     }
 
-    List<Post> allPosts=new LinkedList<>();
-    public List<Post> getAllPosts() {
-        return allPosts;
-    }
-    public void addPost(Post post) {
-        allPosts.add(post);
+ AppLocalDbRepository localDb = AppLocalDb.getAppDb();
+    public interface GetAllPostsListener {
+        void onComplete(List<Post> data);
     }
 
+    public void  getAllPosts(GetAllPostsListener callback) {
+        executor.execute(() -> {
+            List<Post> data = localDb.postDao().getAll();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            mainHandler.post(() -> {
+                callback.onComplete(data);
+            });
+        });
+    }
+
+public interface AddPostListener {
+        void onComplete();
+    }
+    public void addPost(Post post, AddPostListener listener) {
+        executor.execute(()->{
+            localDb.postDao().insertAll(post);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            mainHandler.post(()->{
+                listener.onComplete();
+            });
+        });
+    }
 
 
 }

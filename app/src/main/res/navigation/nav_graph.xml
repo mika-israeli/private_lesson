@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/postsListFragment">
+    app:startDestination="@id/postListFragment">
 
     <fragment
-        android:id="@+id/postsListFragment"
+        android:id="@+id/postListFragment"
         android:name="com.example.private_lesson.PostListFragment"
         android:label="Search teacher"
         tools:layout="@layout/fragment_post_list">
@@ -30,4 +30,9 @@
         tools:layout="@layout/fragment_add_post" />
     <action android:id="@+id/action_global_addPostFragment" app:destination="@id/addPostFragment" />
     <action android:id="@+id/action_global_addPostFragment2" app:destination="@id/addPostFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.private_lesson.AboutFragment"
+        android:label="About"
+        tools:layout="@layout/fragment_about" />
 </navigation>

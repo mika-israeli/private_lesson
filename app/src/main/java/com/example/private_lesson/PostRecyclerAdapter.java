@@ -16,6 +16,9 @@ import java.util.List;
 class PostViewHolder extends RecyclerView.ViewHolder{
     TextView nameTv;
     TextView idTv;
+
+    TextView descriptionTv;
+    TextView priceTv;
     CheckBox cb;
     List<Post> data;
     public PostViewHolder(@NonNull View itemView, PostRecyclerAdapter.OnItemClickListener listener, List<Post> data) {
@@ -23,6 +26,9 @@ class PostViewHolder extends RecyclerView.ViewHolder{
         this.data = data;
         nameTv = itemView.findViewById(R.id.postlistrow_name_tv);
         idTv = itemView.findViewById(R.id.postlistrow_id_tv);
+        descriptionTv = itemView.findViewById(R.id.postlistrow_description_tv);
+        priceTv = itemView.findViewById(R.id.postlistrow_price_tv);
+
         cb = itemView.findViewById(R.id.postlistrow_cb);
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +50,9 @@ class PostViewHolder extends RecyclerView.ViewHolder{
     public void bind( Post post, int pos) {
         nameTv.setText(post.teacherName);
         idTv.setText(post.id);
+        descriptionTv.setText(post.description);
+        priceTv.setText(post.price+"$");
+
         cb.setChecked(post.cb);
         cb.setTag(pos);
     }
@@ -57,6 +66,10 @@ public class PostRecyclerAdapter extends RecyclerView.Adapter<PostViewHolder>{
 
     LayoutInflater inflater;
     List<Post> data;
+    public void setData(List<Post> data){
+        this.data = data;
+        notifyDataSetChanged();
+    }
     public PostRecyclerAdapter(LayoutInflater inflater, List<Post> data){
         this.inflater = inflater;
         this.data = data;

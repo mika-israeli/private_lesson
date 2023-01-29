@@ -35,23 +35,27 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    ///מייצר את התפריט
+    int fragmentMenuId = 0;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
+        if (fragmentMenuId != 0){
+            menu.removeItem(fragmentMenuId);
+        }
+        fragmentMenuId = 0;
         return super.onCreateOptionsMenu(menu);
     }
+    ////מגדיר את התפריט
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         if (item.getItemId() == android.R.id.home){
             navController.popBackStack();
-        }
-        ///send to profile page
-        if(item.getItemId() == R.id.profile){
-            navController.navigate(R.id.action_global_addPostFragment);
-        }
-        else if(item.getItemId() == R.id.main_menu_add){
-            navController.navigate(R.id.action_global_addPostFragment);
-
+        }else{
+            fragmentMenuId = item.getItemId();
+            return NavigationUI.onNavDestinationSelected(item,navController);
         }
         return super.onOptionsItemSelected(item);
     }
