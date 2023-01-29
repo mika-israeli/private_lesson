@@ -18,6 +18,8 @@ public class Post {
     public String price="";
     public String avatarUrl="";
     public Boolean cb=false;
+    public Long lastUpdated;
+
 
     public void setId(String id) {
         this.id = id;
@@ -80,6 +82,7 @@ public class Post {
         this.id = id;
         this.cb = cb;
         this.avatarUrl = avatarUrl;
+
     }
 
     static final String NAME = "name";
@@ -89,6 +92,8 @@ public class Post {
     static final String AVATAR = "avatar";
     static final String CB = "cb";
     static final String COLLECTION = "lesssons";
+    static final String LAST_UPDATED = "lastUpdated";
+    static final String LOCAL_LAST_UPDATED = "students_local_last_update";
 
     public static Post fromJson(Map<String,Object> json){
         String id = (String)json.get(ID);

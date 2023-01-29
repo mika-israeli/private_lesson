@@ -99,12 +99,12 @@ public class AddPostFragment extends Fragment {
                     if (url != null){
                         post.setAvatarUrl(url);
                     }
-                    Model.instance().addPost(post, () -> {
+                    Model.instance().addPost(post, (unused) -> {
                         Navigation.findNavController(view1).popBackStack();
                     });
                 });
             }else {
-                Model.instance().addPost(post, () -> {
+                Model.instance().addPost(post, (unused) -> {
                     Navigation.findNavController(view1).popBackStack();
                 });
             }

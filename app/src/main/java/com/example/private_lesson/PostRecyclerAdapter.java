@@ -4,12 +4,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.private_lesson.model.Post;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -21,6 +23,7 @@ class PostViewHolder extends RecyclerView.ViewHolder{
     TextView priceTv;
     CheckBox cb;
     List<Post> data;
+    ImageView avatarImage;
     public PostViewHolder(@NonNull View itemView, PostRecyclerAdapter.OnItemClickListener listener, List<Post> data) {
         super(itemView);
         this.data = data;
@@ -28,6 +31,8 @@ class PostViewHolder extends RecyclerView.ViewHolder{
         idTv = itemView.findViewById(R.id.postlistrow_id_tv);
         descriptionTv = itemView.findViewById(R.id.postlistrow_description_tv);
         priceTv = itemView.findViewById(R.id.postlistrow_price_tv);
+        avatarImage = itemView.findViewById(R.id.postlistrow_avatar_img);
+
 
         cb = itemView.findViewById(R.id.postlistrow_cb);
         cb.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +60,12 @@ class PostViewHolder extends RecyclerView.ViewHolder{
 
         cb.setChecked(post.cb);
         cb.setTag(pos);
+        if (post.getAvatarUrl()  != null && post.getAvatarUrl().length() > 5) {
+            Picasso.get().load(post.getAvatarUrl()).placeholder
+                    (R.drawable.avatar).into(avatarImage);
+        }else{
+            avatarImage.setImageResource(R.drawable.avatar);
+        }
     }
 }
 

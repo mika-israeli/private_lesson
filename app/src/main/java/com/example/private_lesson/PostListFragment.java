@@ -1,7 +1,11 @@
 package com.example.private_lesson;
 
+import android.content.Context;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,8 +24,9 @@ import java.util.List;
 
 public class PostListFragment extends Fragment {
     FragmentPostListBinding binding;
-    List<Post> data=new LinkedList<>();
+
     PostRecyclerAdapter adapter;
+   PostsListFragmentViewModel viewModel;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -30,7 +35,7 @@ public class PostListFragment extends Fragment {
         View view = binding.getRoot();
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PostRecyclerAdapter(getLayoutInflater(),data);
+        adapter = new PostRecyclerAdapter(getLayoutInflater(),viewModel.getData());
         binding.recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new PostRecyclerAdapter.OnItemClickListener() {
@@ -38,7 +43,7 @@ public class PostListFragment extends Fragment {
             ///כאשר אני לוחצת על פוסט נפתח משהו
             public void onItemClick(int pos) {
                 Log.d("TAG", "Row was clicked " + pos);
-                Post post = data.get(pos);
+                Post post = viewModel.getData().get(pos);
              PostListFragmentDirections.ActionPostListFragmentToBlueFragment action
                         = PostListFragmentDirections.actionPostListFragmentToBlueFragment(post.teacherName + " " + post.description + " " + post.price + " " + post.id);
                 Navigation.findNavController(view).navigate
@@ -50,6 +55,12 @@ public class PostListFragment extends Fragment {
         addButton.setOnClickListener(Navigation.createNavigateOnClickListener(action));
         return view;
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        viewModel = new ViewModelProvider(this).get(PostsListFragmentViewModel.class);
+    }
     @Override
     public void onResume() {
         super.onResume();
@@ -59,8 +70,8 @@ public class PostListFragment extends Fragment {
     void reloadData(){
         binding.progressBar.setVisibility(View.VISIBLE);
         Model.instance().getAllPosts((poList)->{
-            data = poList;
-            adapter.setData(data);
+            viewModel.setData(poList);
+            adapter.setData(viewModel.getData());
             binding.progressBar.setVisibility(View.GONE);
         });
     }
