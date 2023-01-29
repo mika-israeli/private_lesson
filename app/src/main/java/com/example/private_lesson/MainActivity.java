@@ -13,12 +13,20 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import com.example.private_lesson.model.Post;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.main_navhost);
          navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this,navController);
+
 
 
     }

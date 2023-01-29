@@ -4,6 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Entity
 
 public class Post {
@@ -78,4 +81,35 @@ public class Post {
         this.cb = cb;
         this.avatarUrl = avatarUrl;
     }
+
+    static final String NAME = "name";
+    static final String ID = "id";
+    static final String DESCRIPTION = "description";
+    static final String PRICE = "price";
+    static final String AVATAR = "avatar";
+    static final String CB = "cb";
+    static final String COLLECTION = "lesssons";
+
+    public static Post fromJson(Map<String,Object> json){
+        String id = (String)json.get(ID);
+        String name = (String)json.get(NAME);
+        String description = (String)json.get(DESCRIPTION);
+        String price = (String)json.get(PRICE);
+        String avatar = (String)json.get(AVATAR);
+        Boolean cb = (Boolean) json.get(CB);
+        Post post = new Post(name,description,price,id,cb,avatar);
+        return post;
+    }
+
+    public Map<String,Object> toJson(){
+        Map<String, Object> json = new HashMap<>();
+        json.put(ID, getId());
+        json.put(NAME, getTeacherName());
+        json.put(DESCRIPTION, getDescription());
+        json.put(PRICE, getPrice());
+        json.put(AVATAR, getAvatarUrl());
+        json.put(CB, getCb());
+        return json;
+    }
+
 }
