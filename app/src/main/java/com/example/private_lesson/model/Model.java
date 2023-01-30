@@ -29,24 +29,30 @@ public class Model {
     public interface Listener<T>{
         void onComplete(T data);
     }
-    public void getAllPosts(Listener<List<Post>> callback){
-        firebaseModel.getAllPosts(callback);
-//
-    }
+    public void getAllPosts(Listener<List<Post>> callback) {
+        Long localLocalLastUpdate = Post.getLocalLastUpdate();
+        firebaseModel.getAllPostsSince(localLocalLastUpdate,List->{
+            executor.execute(()->{
+                Long time=localLocalLastUpdate;
+                for(Post post:List){
+                    localDb.postDao().insertAll(post);
+                    if(time<post.getLastUpdated()){
+                        time=post.getLastUpdated();
+                    }
+                }
+                Post.setLocalLastUpdate(time);
+                List<Post> complete = localDb.postDao().getAll();
+                mainHandler.post(()->{
+                    callback.onComplete(complete);
+                });
+            });
+                });
 
+
+    }
     public void addPost(Post po, Listener<Void> listener){
         firebaseModel.addPost(po,listener);
-//        executor.execute(()->{
-//            localDb.studentDao().insertAll(st);
-//            try {
-//                Thread.sleep(5000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            mainHandler.post(()->{
-//                listener.onComplete();
-//            });
-//        });
+
     }
 
     public void uploadImage(String name, Bitmap bitmap,Listener<String> listener) {

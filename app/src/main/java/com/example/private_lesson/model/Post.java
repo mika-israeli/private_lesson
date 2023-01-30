@@ -1,14 +1,17 @@
 package com.example.private_lesson.model;
-
+import android.content.Context;
+import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import com.example.private_lesson.MyApplication;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FieldValue;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity
-
 public class Post {
     @PrimaryKey
     @NonNull
@@ -20,15 +23,80 @@ public class Post {
     public Boolean cb=false;
     public Long lastUpdated;
 
+    public Post(){
+    }
+    public Post(String teacherName, String description,
+                  String price,String id, Boolean cb,String avatarUrl) {
+        this.teacherName = teacherName;
+        this.description = description;
+        this.price = price;
+        this.id = id;
+        this.cb = cb;
+        this.avatarUrl = avatarUrl;
+    }
 
-    public void setId(String id) {
+
+    static final String NAME = "name";
+    static final String ID = "id";
+    static final String DESCRIPTION = "description";
+    static final String PRICE = "price";
+    static final String AVATAR = "avatar";
+    static final String CB = "cb";
+    static final String COLLECTION = "lessons";
+    static final String LAST_UPDATED = "lastUpdated";
+    static final String LOCAL_LAST_UPDATED = "posts_local_last_update";
+
+    public static Post fromJson(Map<String,Object> json){
+        String id = (String)json.get(ID);
+        String name = (String)json.get(NAME);
+        String description = (String)json.get(DESCRIPTION);
+        String price = (String)json.get(PRICE);
+        String avatar = (String)json.get(AVATAR);
+        Boolean cb = (Boolean) json.get(CB);
+        Post post = new Post(name,description,price,id,cb,avatar);
+        try{
+            Timestamp time = (Timestamp) json.get(LAST_UPDATED);
+            post.setLastUpdated(time.getSeconds());
+        }catch(Exception e){
+
+        }
+        return post;
+    }
+
+    public static Long getLocalLastUpdate() {
+        SharedPreferences sharedPref = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        return sharedPref.getLong(LOCAL_LAST_UPDATED, 0);
+    }
+
+    public static void setLocalLastUpdate(Long time) {
+        SharedPreferences sharedPref = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong(LOCAL_LAST_UPDATED,time);
+        editor.commit();
+    }
+
+
+
+
+    public Map<String,Object> toJson(){
+        Map<String, Object> json = new HashMap<>();
+        json.put(ID, getId());
+        json.put(NAME, getTeacherName());
+        json.put(DESCRIPTION, getDescription());
+        json.put(PRICE, getPrice());
+        json.put(AVATAR, getAvatarUrl());
+        json.put(CB, getCb());
+        json.put(LAST_UPDATED, FieldValue.serverTimestamp());
+        return json;
+    }
+
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
-    public void setTeacherName(String teacherName) {
-        this.teacherName = teacherName;
+    public void setTeacherName(String name) {
+        this.teacherName = name;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -45,10 +113,7 @@ public class Post {
         this.cb = cb;
     }
 
-    public Post() {
-
-    }
-
+    @NonNull
     public String getId() {
         return id;
     }
@@ -56,7 +121,6 @@ public class Post {
     public String getTeacherName() {
         return teacherName;
     }
-
     public String getDescription() {
         return description;
     }
@@ -73,48 +137,11 @@ public class Post {
         return cb;
     }
 
-
-
-    public Post(String teacherName, String description, String price, String id, Boolean cb, String avatarUrl) {
-        this.teacherName = teacherName;
-        this.description = description;
-        this.price = price;
-        this.id = id;
-        this.cb = cb;
-        this.avatarUrl = avatarUrl;
-
+    public Long getLastUpdated() {
+        return lastUpdated;
     }
 
-    static final String NAME = "name";
-    static final String ID = "id";
-    static final String DESCRIPTION = "description";
-    static final String PRICE = "price";
-    static final String AVATAR = "avatar";
-    static final String CB = "cb";
-    static final String COLLECTION = "lesssons";
-    static final String LAST_UPDATED = "lastUpdated";
-    static final String LOCAL_LAST_UPDATED = "students_local_last_update";
-
-    public static Post fromJson(Map<String,Object> json){
-        String id = (String)json.get(ID);
-        String name = (String)json.get(NAME);
-        String description = (String)json.get(DESCRIPTION);
-        String price = (String)json.get(PRICE);
-        String avatar = (String)json.get(AVATAR);
-        Boolean cb = (Boolean) json.get(CB);
-        Post post = new Post(name,description,price,id,cb,avatar);
-        return post;
+    public void setLastUpdated(Long lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
-
-    public Map<String,Object> toJson(){
-        Map<String, Object> json = new HashMap<>();
-        json.put(ID, getId());
-        json.put(NAME, getTeacherName());
-        json.put(DESCRIPTION, getDescription());
-        json.put(PRICE, getPrice());
-        json.put(AVATAR, getAvatarUrl());
-        json.put(CB, getCb());
-        return json;
-    }
-
 }
