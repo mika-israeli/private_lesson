@@ -16,6 +16,12 @@ public class Post {
     @PrimaryKey
     @NonNull
     public String id="";
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public String userId="";
     public String teacherName="";
     public String description="";
     public String price="";
@@ -26,18 +32,21 @@ public class Post {
     public Post(){
     }
     public Post(String teacherName, String description,
-                  String price,String id, Boolean cb,String avatarUrl) {
+                  String price,String id, Boolean cb,String avatarUrl, String userId) {
         this.teacherName = teacherName;
         this.description = description;
         this.price = price;
         this.id = id;
         this.cb = cb;
         this.avatarUrl = avatarUrl;
+        this.userId = userId;
     }
 
 
     static final String NAME = "name";
     static final String ID = "id";
+
+    static final String USER = "user";
     static final String DESCRIPTION = "description";
     static final String PRICE = "price";
     static final String AVATAR = "avatar";
@@ -53,7 +62,8 @@ public class Post {
         String price = (String)json.get(PRICE);
         String avatar = (String)json.get(AVATAR);
         Boolean cb = (Boolean) json.get(CB);
-        Post post = new Post(name,description,price,id,cb,avatar);
+        String userId = (String)json.get(USER);
+        Post post = new Post(name,description,price,id,cb,avatar,userId);
         try{
             Timestamp time = (Timestamp) json.get(LAST_UPDATED);
             post.setLastUpdated(time.getSeconds());
@@ -81,6 +91,7 @@ public class Post {
     public Map<String,Object> toJson(){
         Map<String, Object> json = new HashMap<>();
         json.put(ID, getId());
+        json.put(USER,geyUserId());
         json.put(NAME, getTeacherName());
         json.put(DESCRIPTION, getDescription());
         json.put(PRICE, getPrice());
@@ -90,8 +101,13 @@ public class Post {
         return json;
     }
 
+
+
     public void setId(@NonNull String id) {
         this.id = id;
+    }
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public void setTeacherName(String name) {
@@ -116,6 +132,9 @@ public class Post {
     @NonNull
     public String getId() {
         return id;
+    }
+    private String geyUserId() {
+        return userId;
     }
 
     public String getTeacherName() {

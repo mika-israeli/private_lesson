@@ -95,6 +95,23 @@ public class FirebaseModel{
             }
         });
     }
+    public void getAllTeachersSince(Long since,Model.Listener<List<Teacher>> callback){
+        db.collection(Teacher.COLLECTION).whereGreaterThanOrEqualTo(Teacher.LAST_UPDATED,new Timestamp(since,0)).
+                get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        List<Teacher> list = new LinkedList<>();
+                        if (task.isSuccessful()){
+                            QuerySnapshot jsonsList = task.getResult();
+                            for (DocumentSnapshot json: jsonsList){
+                                Teacher teacher = Teacher.fromJson(json.getData());
+                                list.add(teacher);
+                            }
+                        }
+                        callback.onComplete(list);
+                    }
+                });
+    }
 
     public void addPost(Post post, Model.Listener<Void> listener) {
         db.collection(Post.COLLECTION).document(post.getId()).set(post.toJson())
@@ -105,6 +122,50 @@ public class FirebaseModel{
                     }
                 });
     }
+    public void addTeacher(Teacher teacher, Model.Listener<Void> listener) {
+        db.collection(Teacher.COLLECTION).document(teacher.teacherId).set(teacher.toJson())
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        listener.onComplete(null);
+                    }
+                });
+    }
+
+    public void getPostById(String id, Model.Listener<Post> listener){
+        db.collection(Post.COLLECTION).whereEqualTo(Post.ID,id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Post post = new Post();
+                if (task.isSuccessful()){
+                    QuerySnapshot jsonsList = task.getResult();
+                    for (DocumentSnapshot json: jsonsList){
+                        post = Post.fromJson(json.getData());
+
+                    }
+                }
+                listener.onComplete(post);
+            }
+        });
+    }
+
+    public void getTeacherById(String id, Model.Listener<Teacher> listener){
+        db.collection(Teacher.COLLECTION).whereEqualTo(Teacher.ID,id).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+               Teacher teacher= new Teacher();
+                if (task.isSuccessful()){
+                    QuerySnapshot jsonsList = task.getResult();
+                    for (DocumentSnapshot json: jsonsList){
+                        teacher = Teacher.fromJson(json.getData());
+
+                    }
+                }
+                listener.onComplete(teacher);
+            }
+        });
+    }
+
 
     void uploadImage(String name, Bitmap bitmap, Model.Listener<String> listener){
         StorageReference storageRef = storage.getReference();
@@ -132,4 +193,8 @@ public class FirebaseModel{
         });
 
     }
+
+
+
+
 }

@@ -12,12 +12,12 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-305dp" />
+        android:text="Sign in to your account"
+        tools:layout_editor_absoluteX="28dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/emailSignUp"
+        android:id="@+id/emailSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
@@ -26,24 +26,24 @@
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/passwordSignUp"
+        android:id="@+id/passwordSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
         helperText="Password must be at least 6 characters"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/emailSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/emailSignIn"
         app:layout_constraintVertical_bias="0.202"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button
-        android:id="@+id/signUpb"
+        android:id="@+id/signInb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordSignUp"
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignIn"
         tools:layout_editor_absoluteX="161dp"
         tools:ignore="MissingConstraints" />
 

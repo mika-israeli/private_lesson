@@ -4,17 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LogInOrSignUpActivity">
+    tools:context=".HomeActivity">
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:name="com.example.private_lesson.LogInOrSignUpFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="199dp"
-        tools:layout_editor_absoluteY="117dp"
-        tools:ignore="MissingConstraints"
+        android:id="@+id/home_navhost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/signinorlogin_graph" />
-        />
+        app:navGraph="@navigation/home_graph" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

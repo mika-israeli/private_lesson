@@ -18,7 +18,6 @@ import java.util.List;
 class PostViewHolder extends RecyclerView.ViewHolder{
     TextView nameTv;
     TextView idTv;
-
     TextView descriptionTv;
     TextView priceTv;
     CheckBox cb;
