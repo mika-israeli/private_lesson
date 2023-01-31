@@ -3,6 +3,7 @@ package com.example.private_lesson.model;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -11,6 +12,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -26,6 +30,8 @@ import java.util.List;
 public class FirebaseModel{
     FirebaseFirestore db;
     FirebaseStorage storage;
+    FirebaseAuth auth;
+    FirebaseUser user;
 
     FirebaseModel(){
         db = FirebaseFirestore.getInstance();
@@ -34,7 +40,42 @@ public class FirebaseModel{
                 .build();
         db.setFirestoreSettings(settings);
         storage = FirebaseStorage.getInstance();
+        auth = FirebaseAuth.getInstance();
 
+    }
+
+    public void signUp(String email, String password, Model.Listener<String> listener){
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Log.d("TAG", "signUp: success");
+                    user = auth.getCurrentUser();
+                    listener.onComplete(user.getUid());
+                }
+                else{
+                    Log.d("TAG", "signUp: failed");
+                    listener.onComplete("");
+                }
+            }
+        });
+    }
+
+    public void login(String email, String password, Model.Listener<Boolean> listener){
+        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Log.d("TAG", "login: success");
+                    user = auth.getCurrentUser();
+                    listener.onComplete(true);
+                }
+                else{
+                    Log.d("TAG", "login: failed");
+                    listener.onComplete(false);
+                }
+            }
+        });
     }
 
     public void getAllPostsSince(Long since,Model.Listener<List<Post>> callback){

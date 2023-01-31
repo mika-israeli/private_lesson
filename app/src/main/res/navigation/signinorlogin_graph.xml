@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signinorlogin_graph"
+    android:label="welcome"
+    app:startDestination="@id/logInOrSignUpFragment">
+
+    <fragment
+        android:id="@+id/logInOrSignUpFragment"
+        android:name="com.example.private_lesson.LogInOrSignUpFragment"
+        android:label="fragment_log_in_or_sign_up"
+        tools:layout="@layout/fragment_log_in_or_sign_up">
+        <action
+            android:id="@+id/action_logInOrSignUpFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_logInOrSignUpFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.example.private_lesson.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.example.private_lesson.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_addPostFragment"
+            app:destination="@id/addPostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.example.private_lesson.AddPostFragment"
+        android:label="fragment_add_post"
+        tools:layout="@layout/fragment_add_post">
+        <argument
+            android:name="uid"
+            app:argType="string" />
+    </fragment>
+</navigation>

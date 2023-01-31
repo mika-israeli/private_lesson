@@ -1,5 +1,6 @@
 package com.example.private_lesson;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.private_lesson.model.Model;
@@ -11,14 +12,10 @@ import java.util.List;
 public class PostsListFragmentViewModel extends ViewModel {
 
 
-    private List<Post> data = new LinkedList<>();
+    private LiveData<List<Post>> data = Model.instance().getAllPosts();
 
-     List<Post> getData(){
+     LiveData<List<Post>> getData(){
         return data;
     }
 
-
-     void setData( List<Post> list){
-        this.data = list;
-    }
 }

@@ -110,7 +110,8 @@ public class AddPostFragment extends Fragment {
             }
         });
 
-        binding.cancellBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).popBackStack(R.id.postListFragment,false));
+        binding.cancellBtn.setOnClickListener(view1 ->
+                Navigation.findNavController(view1).popBackStack(R.id.postListFragment,false));
 
         binding.cameraButton.setOnClickListener(view1->{
             cameraLauncher.launch(null);

@@ -35,7 +35,7 @@ public class PostListFragment extends Fragment {
         View view = binding.getRoot();
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PostRecyclerAdapter(getLayoutInflater(),viewModel.getData());
+        adapter = new PostRecyclerAdapter(getLayoutInflater(),viewModel.getData().getValue());
         binding.recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new PostRecyclerAdapter.OnItemClickListener() {
@@ -43,7 +43,7 @@ public class PostListFragment extends Fragment {
             ///כאשר אני לוחצת על פוסט נפתח משהו
             public void onItemClick(int pos) {
                 Log.d("TAG", "Row was clicked " + pos);
-                Post post = viewModel.getData().get(pos);
+                Post post = viewModel.getData().getValue().get(pos);
              PostListFragmentDirections.ActionPostListFragmentToBlueFragment action
                         = PostListFragmentDirections.actionPostListFragmentToBlueFragment(post.teacherName + " " + post.description + " " + post.price + " " + post.id);
                 Navigation.findNavController(view).navigate
@@ -53,6 +53,17 @@ public class PostListFragment extends Fragment {
        View addButton = view.findViewById(R.id.btnAdd);
         NavDirections action = PostListFragmentDirections.actionGlobalAddPostFragment();
         addButton.setOnClickListener(Navigation.createNavigateOnClickListener(action));
+        binding.progressBar.setVisibility(View.GONE);
+        viewModel.getData().observe(getViewLifecycleOwner(), list -> {
+            adapter.setData(list);
+
+        });
+        Model.instance().EventPostsListLoadingState.observe(getViewLifecycleOwner(), status -> {
+           binding.swipeRefresh.setRefreshing(status== Model.LoadingState.LOADING);
+        });
+        binding.swipeRefresh.setOnRefreshListener(()->{
+                reloadData();
+    });
         return view;
     }
 
@@ -61,18 +72,11 @@ public class PostListFragment extends Fragment {
         super.onAttach(context);
         viewModel = new ViewModelProvider(this).get(PostsListFragmentViewModel.class);
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        reloadData();
-    }
+
 
     void reloadData(){
-        binding.progressBar.setVisibility(View.VISIBLE);
-        Model.instance().getAllPosts((poList)->{
-            viewModel.setData(poList);
-            adapter.setData(viewModel.getData());
-            binding.progressBar.setVisibility(View.GONE);
-        });
+//        binding.progressBar.setVisibility(View.VISIBLE);
+        Model.instance().refreshAllPosts();
+
     }
 }
