@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_postListFragment_to_blueFragment"
             app:destination="@id/blueFragment" />
+        <action
+            android:id="@+id/action_postListFragment_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/blueFragment"
@@ -38,6 +41,9 @@
         <action
             android:id="@+id/action_aboutFragment_to_editAboutFragment"
             app:destination="@id/editAboutFragment" />
+        <argument
+            android:name="userID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"

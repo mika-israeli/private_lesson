@@ -41,6 +41,7 @@ public class FirebaseModel{
         db.setFirestoreSettings(settings);
         storage = FirebaseStorage.getInstance();
         auth = FirebaseAuth.getInstance();
+        user = auth.getCurrentUser();
 
     }
 

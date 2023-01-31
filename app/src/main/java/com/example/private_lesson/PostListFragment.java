@@ -51,6 +51,9 @@ public class PostListFragment extends Fragment {
             }
         });
        View addButton = view.findViewById(R.id.btnAdd);
+
+
+
         NavDirections action = PostListFragmentDirections.actionGlobalAddPostFragment();
         addButton.setOnClickListener(Navigation.createNavigateOnClickListener(action));
         binding.progressBar.setVisibility(View.GONE);
