@@ -19,9 +19,9 @@ public class LogInOrSignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in_or_sign_up);
-        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().
-                findFragmentById(R.id.fragmentContainerView);
-        navController = navHostFragment.getNavController();
+//        NavHostFragment navHostFragment = (NavHostFragment)getSupportFragmentManager().
+//                findFragmentById(R.id.fragmentContainerView);
+//        navController = navHostFragment.getNavController();
 
 
 
