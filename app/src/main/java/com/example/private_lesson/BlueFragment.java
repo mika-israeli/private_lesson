@@ -2,6 +2,7 @@
 package com.example.private_lesson;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,17 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+
+import com.example.private_lesson.databinding.FragmentBlueBinding;
 
 public class BlueFragment extends Fragment {
     TextView titleTv;
     String title;
+    String postID;
+
+    FragmentBlueBinding binding;
 
     public static BlueFragment newInstance(String title){
         BlueFragment frag = new BlueFragment();
@@ -35,8 +42,9 @@ public class BlueFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_blue, container, false);
+        postID = getArguments().getString("postID");
+        binding = FragmentBlueBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
         title= BlueFragmentArgs.fromBundle(getArguments()).getBlueTitle();
         TextView titleTv = view.findViewById(R.id.bluefrag_title_tv);
 
@@ -49,6 +57,13 @@ public class BlueFragment extends Fragment {
         button.setOnClickListener((view1)->{
             Navigation.findNavController(view1).popBackStack();
         });
+
+        binding.editPostBtn.setOnClickListener((view1)->{
+            NavDirections action = BlueFragmentDirections.actionBlueFragmentToEditPostFragment(postID);
+            Navigation.findNavController(view1).navigate(action);
+        });
+
+
         return view;
     }
 

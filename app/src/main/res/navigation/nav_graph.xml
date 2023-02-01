@@ -34,6 +34,9 @@
         <argument
             android:name="postID"
             app:argType="string" />
+        <action
+            android:id="@+id/action_blueFragment_to_editPostFragment"
+            app:destination="@id/editPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPostFragment"
@@ -100,5 +103,14 @@
     <argument
         android:name="userId"
         app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPostFragment"
+        android:name="com.example.private_lesson.EditPostFragment"
+        android:label="fragment_edit_post"
+        tools:layout="@layout/fragment_edit_post" >
+        <argument
+            android:name="postID"
+            app:argType="string" />
     </fragment>
 </navigation>

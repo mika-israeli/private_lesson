@@ -167,6 +167,43 @@ public class FirebaseModel{
         });
     }
 
+    public Void deletePost(String postId, Model.Listener<Void> listener){
+        db.collection(Post.COLLECTION).document(postId).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                listener.onComplete(null);
+            }
+        });
+        return null;
+    }
+
+    public Boolean isPostOfTeacher(String teacherId, String postId){
+        final boolean[] isPostOfTeacher = {false};
+        db.collection(Post.COLLECTION).whereEqualTo(Post.ID,postId).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Post post = new Post();
+                if (task.isSuccessful()){
+                    QuerySnapshot jsonsList = task.getResult();
+                    for (DocumentSnapshot json: jsonsList){
+                        post = Post.fromJson(json.getData());
+
+                    }
+                }
+
+                if (post.userId.equals(teacherId)){
+                    isPostOfTeacher[0] = true;
+                }
+                else{
+                    isPostOfTeacher[0] = false;
+                }
+            }
+        });
+
+   return isPostOfTeacher[0];
+    }
+
+
 
     void uploadImage(String name, Bitmap bitmap, Model.Listener<String> listener){
         StorageReference storageRef = storage.getReference();

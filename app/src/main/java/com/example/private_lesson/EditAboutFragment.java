@@ -1,6 +1,7 @@
 package com.example.private_lesson;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,13 +55,11 @@ public class EditAboutFragment extends Fragment {
 
         galleryLauncher = registerForActivityResult(new
                         ActivityResultContracts.GetContent(),
-                new ActivityResultCallback<Uri>() {
-                    @Override
+                new ActivityResultCallback<Uri>() {             @Override
                     public void onActivityResult(Uri result) {
-                        if (result != null) {
-                            binding.avatarImg.setImageURI(result);
+                                binding.avatarImg.setImageURI(result);
                             isAvatarSelected = true;
-                        }
+
                     }
                 });
 
@@ -68,36 +68,61 @@ public class EditAboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        userId = EditAboutFragmentArgs.fromBundle(getArguments()).getUserId();
+        userId = getArguments().getString("userId");
         Log.d("TAG", "onCreateView: " + userId);
+        binding = FragmentEditAboutBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
 
+        Model.instance().getTeacherById(userId, teacher -> {
+            avatar = teacher.getAvatarUrl();
+            binding.nameEt.setText(teacher.getTeacherName());
+            if (!teacher.getAvatarUrl().equals("")) {
+                Picasso.get().load(teacher.getAvatarUrl()).into(binding.avatarImg);
+            } else {
+                binding.avatarImg.setImageResource(R.drawable.avatar);
+            }
 
+        });
 
+        binding.saveButton.setOnClickListener(view1 -> {
+            String name = binding.nameEt.getText().toString();
+            Teacher teacher = new Teacher(userId, name, avatar);
+            if (isAvatarSelected) {
+                binding.avatarImg.setDrawingCacheEnabled(true);
+                binding.avatarImg.buildDrawingCache();
+                Bitmap bitmap = ((BitmapDrawable) binding.avatarImg.getDrawable()).getBitmap();
+                Model.instance().uploadImage(userId, bitmap, url -> {
+                    if (url != null) {
+                        teacher.setAvatarUrl(url);
+                    }
+                    Model.instance().addTeacher(teacher, (unused) -> {
+                       Navigation.findNavController(view).navigateUp();
 
-        return null;}
-//        binding = FragmentEditAboutBinding.inflate(inflater, container, false);
-//        View view = binding.getRoot();
-//
-//        Model.instance().getTeacherById(userId, teacher -> {
-//            avatar = teacher.getAvatarUrl();
-//            binding.editId.setText(teacher.getTeacherId());
-//            binding.nameEt.setText(teacher.getTeacherName());
-//            if (!teacher.getAvatarUrl().equals("")) {
-//                Picasso.get().load(teacher.getAvatarUrl()).placeholder(R.drawable.avatar).into(binding.avatarImg);
-//            } else {
-//                binding.avatarImg.setImageResource(R.drawable.avatar);
-//            }
-//        });
-//
-//        binding.saveBtn.setOnClickListener(v -> {
-//            String id = binding.editId.getText().toString();
-//            String name = binding.nameEt.getText().toString();
-//            Teacher teacher = new Teacher(id, name, avatar);
-//            if (isAvatarSelected) {
-//
-//            }
-//        });
-//    }
+                    });
+                });
+            }
+            else
+                {
+                    Model.instance().addTeacher(teacher, (unused) -> {
+                        //back to profile and refresh
+                        Navigation.findNavController(view).navigateUp() ;
+
+                    });
+                }
+
+        });
+
+        binding.cameraButton.setOnClickListener(view1 -> {
+            cameraLauncher.launch(null);
+        });
+        binding.galleryButton.setOnClickListener(view1 -> {
+            galleryLauncher.launch("image/*");
+        });
+
+return view;
+
+    }
+
 
 }
 

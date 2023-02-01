@@ -223,4 +223,12 @@ public class Model {
 
     }
 
+    public Boolean isTeacherOfThePost(String userId,String postId){
+        return firebaseModel.isPostOfTeacher(userId,postId);
+    }
+
+    public void deletePostFromF(String id, Listener<Void> listener) {
+        firebaseModel.deletePost(id,listener);
+    }
+
 }
