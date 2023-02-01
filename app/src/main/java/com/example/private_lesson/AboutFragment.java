@@ -55,6 +55,7 @@ public class AboutFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentAboutBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        reload();
         //get the user id from auth
         userId = Model.instance().getAuth().getCurrentUser().getUid();
         Model.instance().getTeacherById(userId, teacher -> {
@@ -64,6 +65,7 @@ public class AboutFragment extends Fragment {
             } else {
                 binding.aboutImg.setImageResource(R.drawable.avatar);
             }
+
         });
         binding.signOutBtn.setOnClickListener(v -> {
             Model.instance().getAuth().signOut();
@@ -84,14 +86,34 @@ public class AboutFragment extends Fragment {
 
         binding.seeAllPostsBtn.setOnClickListener(v -> {
             //go to posts list fragment with the user id
-            NavDirections action = AboutFragmentDirections.actionAboutFragmentToTeacherPostListFragment("1",userId);
+            NavDirections action = AboutFragmentDirections.actionAboutFragmentToTeacherPostListFragment("1", userId);
             Navigation.findNavController(v).navigate(action);
         });
 
 
-
         return view;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        reload();
+    }
+
+
+    public void reload(){
+        userId = Model.instance().getAuth().getCurrentUser().getUid();
+        Model.instance().getTeacherById(userId, teacher -> {
+            binding.aboutName.setText("Teacher Name: " + teacher.getTeacherName());
+            if (!teacher.getAvatarUrl().equals("")) {
+                Picasso.get().load(teacher.getAvatarUrl()).placeholder(R.drawable.avatar).into(binding.aboutImg);
+            } else {
+                binding.aboutImg.setImageResource(R.drawable.avatar);
+            }
+        });
+    }
+
+
 }
 
 

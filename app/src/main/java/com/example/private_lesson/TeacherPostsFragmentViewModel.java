@@ -12,6 +12,7 @@ public class TeacherPostsFragmentViewModel extends ViewModel {
 
 
 
+
     private LiveData<List<Post>> allPosts = Model.instance().getAllPosts();
 
 
@@ -28,6 +29,9 @@ public class TeacherPostsFragmentViewModel extends ViewModel {
         }
     public LiveData<List<Post>> getAllPosts() {
         return allPosts;
+    }
+    public void deletePost(String postPd) {
+        allPosts.getValue().remove(getPostById(postPd));
     }
 
 

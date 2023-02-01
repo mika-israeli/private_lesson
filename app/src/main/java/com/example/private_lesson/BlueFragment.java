@@ -14,6 +14,8 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.private_lesson.databinding.FragmentBlueBinding;
+import com.example.private_lesson.model.Model;
+import com.squareup.picasso.Picasso;
 
 public class BlueFragment extends Fragment {
     TextView titleTv;
@@ -56,6 +58,17 @@ public class BlueFragment extends Fragment {
         View button = view.findViewById(R.id.bluefrag_back_btn);
         button.setOnClickListener((view1)->{
             Navigation.findNavController(view1).popBackStack();
+        });
+
+        Model.instance().getPostById(postID, post -> {
+            binding.nameEt.setText("Teacher Name: " + post.getTeacherName());
+            binding.descEt.setText("Description: " + post.getDescription());
+            binding.price.setText("Price: " + post.getPrice());
+            if (!post.getAvatarUrl().equals("")) {
+                Picasso.get().load(post.getAvatarUrl()).placeholder(R.drawable.avatar).into(binding.avatarImg);
+            } else {
+                binding.avatarImg.setImageResource(R.drawable.avatar);
+            }
         });
 
         binding.editPostBtn.setOnClickListener((view1)->{

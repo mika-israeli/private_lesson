@@ -9,6 +9,8 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.util.Log;
@@ -98,6 +100,7 @@ public class EditAboutFragment extends Fragment {
                     }
                     Model.instance().addTeacher(teacher, (unused) -> {
                        Navigation.findNavController(view).navigateUp();
+
 
                     });
                 });
