@@ -11,6 +11,7 @@
         android:id="@+id/aboutFragment"
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="about"
+        android:visible="true"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/postListFragment"

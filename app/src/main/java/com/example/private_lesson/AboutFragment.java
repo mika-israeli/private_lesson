@@ -90,6 +90,12 @@ public class AboutFragment extends Fragment {
             Navigation.findNavController(v).navigate(action);
         });
 
+        binding.API.setOnClickListener(v -> {
+            //go to posts list fragment with the user id
+            NavDirections action = AboutFragmentDirections.actionAboutFragmentToApiFragment();
+            Navigation.findNavController(v).navigate(action);
+        });
+
 
         return view;
     }

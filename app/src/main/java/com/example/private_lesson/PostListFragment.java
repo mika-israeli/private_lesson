@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.private_lesson.databinding.FragmentPostListBinding;
+import com.example.private_lesson.model.EducationModel;
 import com.example.private_lesson.model.Model;
 import com.example.private_lesson.model.Post;
 
@@ -69,6 +70,8 @@ public class PostListFragment extends Fragment {
         binding.swipeRefresh.setOnRefreshListener(()->{
                 reloadData();
     });
+
+
         return view;
     }
 
