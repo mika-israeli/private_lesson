@@ -64,7 +64,7 @@ public class Model {
         return teachersList;
 
     }
-    public List<Post> getMyReviews(List<Post> all, String id){
+    public List<Post> getMyPosts(List<Post> all, String id){
 
         List<Post> mine=new LinkedList<>();
         for(Post p: all)

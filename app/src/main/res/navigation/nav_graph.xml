@@ -44,12 +44,17 @@
         <argument
             android:name="userID"
             app:argType="string" />
+        <action
+            android:id="@+id/action_aboutFragment_to_teacherPostListFragment"
+            app:destination="@id/teacherPostListFragment" />
+
+
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
-        android:name="com.example.private_lesson.LogInFragment"
+        android:name="com.example.private_lesson.SignInFragment"
         android:label="fragment_log_in"
-        tools:layout="@layout/fragment_log_in" >
+        tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment2"
             app:destination="@id/signUpFragment2" />
@@ -71,4 +76,9 @@
             android:name="userId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/teacherPostListFragment"
+        android:name="com.example.private_lesson.TeacherPostListFragment"
+        android:label="fragment_teacher_post_list"
+        tools:layout="@layout/fragment_teacher_post_list" />
 </navigation>

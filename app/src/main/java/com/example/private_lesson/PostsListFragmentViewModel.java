@@ -13,9 +13,7 @@ public class PostsListFragmentViewModel extends ViewModel {
 
 
     private LiveData<List<Post>> data = Model.instance().getAllPosts();
-//    List<Post> getMyData(List<Post> l, String id) {
-//        return Model.instance().getMyReviews(l,id);
-//    }
+
 
      LiveData<List<Post>> getData(){
         return data;

@@ -25,10 +25,10 @@ import com.squareup.picasso.Picasso;
 
 public class AboutFragment extends Fragment {
 
-FragmentAboutBinding binding;
-PostRecyclerAdapter adapter;
-private PostsListFragmentViewModel viewModel;
-String userId;
+    FragmentAboutBinding binding;
+    PostRecyclerAdapter adapter;
+    private PostsListFragmentViewModel viewModel;
+    String userId;
 
 
     @Override
@@ -47,41 +47,53 @@ String userId;
             public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
                 return false;
             }
-        },this, Lifecycle.State.RESUMED);
-        }
+        }, this, Lifecycle.State.RESUMED);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       binding = FragmentAboutBinding.inflate(inflater,container,false);
+        binding = FragmentAboutBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         //get the user id from auth
         userId = Model.instance().getAuth().getCurrentUser().getUid();
-       Model.instance().getTeacherById(userId, teacher -> {
-           binding.aboutName.setText("Name: " + teacher.getTeacherName());
-           if(!teacher.getAvatarUrl().equals("")){
-               Picasso.get().load(teacher.getAvatarUrl()).placeholder(R.drawable.avatar).into(binding.aboutImg);
-           }
-              else{
+        Model.instance().getTeacherById(userId, teacher -> {
+            binding.aboutName.setText("Name: " + teacher.getTeacherName());
+            if (!teacher.getAvatarUrl().equals("")) {
+                Picasso.get().load(teacher.getAvatarUrl()).placeholder(R.drawable.avatar).into(binding.aboutImg);
+            } else {
                 binding.aboutImg.setImageResource(R.drawable.avatar);
-              }
-       });
-      binding.signOutBtn.setOnClickListener(v -> {
-    Model.instance().getAuth().signOut();
-    Intent intent = new Intent(getActivity(), MainActivity.class);
-    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-    startActivity(intent);
-    getActivity().finish();
-     });
+            }
+        });
+        binding.signOutBtn.setOnClickListener(v -> {
+            Model.instance().getAuth().signOut();
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            getActivity().finish();
+        });
 
-binding.editBtn.setOnClickListener(v -> {
+        binding.editBtn.setOnClickListener(v -> {
 
-  //go to editabout fragment with the user id
-    NavDirections action = AboutFragmentDirections.actionAboutFragmentToEditAboutFragment(userId);
-    Navigation.findNavController(v).navigate(action);
+            //go to editabout fragment with the user id
+            NavDirections action = AboutFragmentDirections.actionAboutFragmentToEditAboutFragment(userId);
+            Navigation.findNavController(v).navigate(action);
 
 
-});
+        });
+
+        binding.seeAllPostsBtn.setOnClickListener(v -> {
+
+            //go to editabout fragment with the user id
+            NavDirections action = AboutFragmentDirections.actionAboutFragmentToTeacherPostListFragment(userId);
+            Navigation.findNavController(v).navigate(action);
+
+
+        });
+
+        return view;
+    }
+}   // Path: app/src/main/java/com/example/private_lesson/AboutFragment.java
 //Model.instance().refreshAllPosts();
 //binding.recyclerView.setHasFixedSize(true);
 //binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -106,15 +118,15 @@ binding.editBtn.setOnClickListener(v -> {
 //
 //});
 //binding.swipeRefresh.setOnRefreshListener(this::loadPosts);
-
-
-        return view;
-    }
-
-
-void loadPosts() {
-    Model.instance().refreshAllPosts();
-    }
-}
+//
+//
+//        return view;
+//    }
+//
+//
+//void loadPosts() {
+//    Model.instance().refreshAllPosts();
+//    }
+//}
 
 
