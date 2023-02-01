@@ -52,10 +52,10 @@ class PostViewHolder extends RecyclerView.ViewHolder{
     }
 
     public void bind( Post post, int pos) {
-        nameTv.setText(post.teacherName);
+        nameTv.setText("teacher name: "+post.teacherName);
         idTv.setText(post.id);
-        descriptionTv.setText(post.description);
-        priceTv.setText(post.price+"$");
+        descriptionTv.setText("description: "+post.description);
+        priceTv.setText("lesson price: "+post.price+" $");
 
         cb.setChecked(post.cb);
         cb.setTag(pos);

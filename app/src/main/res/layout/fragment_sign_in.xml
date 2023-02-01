@@ -8,33 +8,23 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Sign in to your account"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="16dp" />
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/emailSignIn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email"
-        tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="127dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="206dp" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/passwordSignIn"
+        helperText="Password must be at least 6 characters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        helperText="Password must be at least 6 characters"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/emailSignIn"
-        app:layout_constraintVertical_bias="0.202"
         tools:layout_editor_absoluteX="0dp" />
 
     <Button

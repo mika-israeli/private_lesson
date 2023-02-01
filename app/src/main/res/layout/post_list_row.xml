@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:textColor="@color/black"
     android:background="?attr/selectableItemBackground">
 
     <ImageView
@@ -16,7 +17,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/avatar" />
+        app:srcCompat="@drawable/avatar"
+        />
+
+        />
 
     <CheckBox
         android:id="@+id/postlistrow_cb"
@@ -27,20 +31,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/postlistrow_name_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="276dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="8dp"
         android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/postlistrow_cb"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/postlistrow_description_tv"
         app:layout_constraintEnd_toStartOf="@+id/postlistrow_cb"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/postlistrow_description_tv" />
-
-
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/postlistrow_avatar_img" />
 
     <TextView
         android:id="@+id/postlistrow_description_tv"
@@ -49,7 +52,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="76dp"
         android:text="TextView"
-        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/postlistrow_cb"
         app:layout_constraintHorizontal_bias="1.0"
@@ -62,7 +66,8 @@
         android:layout_marginStart="10dp"
         android:layout_marginBottom="40dp"
         android:text="TextView"
-        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/postlistrow_cb"
         app:layout_constraintHorizontal_bias="0.0"

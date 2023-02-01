@@ -68,6 +68,7 @@ public class EditAboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Edit your profile");
         userId = getArguments().getString("userId");
         Log.d("TAG", "onCreateView: " + userId);
         binding = FragmentEditAboutBinding.inflate(inflater, container, false);

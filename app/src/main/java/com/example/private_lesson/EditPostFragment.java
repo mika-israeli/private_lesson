@@ -98,11 +98,13 @@ public class EditPostFragment extends Fragment {
 
             });
 
+              binding.cancellBtn.setOnClickListener(view1 ->
+                      Navigation.findNavController(view1).popBackStack(R.id.postListFragment,false));
+
             binding.saveBtn.setOnClickListener(view1 -> {
                 String name = binding.nameEt.getText().toString();
                 String desc = binding.descEt.getText().toString();
                 String price = binding.price.getText().toString();
-                Teacher teacher = new Teacher(userId, name, avatar);
                 Model.instance().deletePostFromF(postID, (unused) -> {
                    Model.instance().refreshAllPosts();
                     });

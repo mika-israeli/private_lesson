@@ -58,7 +58,7 @@ public class AboutFragment extends Fragment {
         //get the user id from auth
         userId = Model.instance().getAuth().getCurrentUser().getUid();
         Model.instance().getTeacherById(userId, teacher -> {
-            binding.aboutName.setText("Name: " + teacher.getTeacherName());
+            binding.aboutName.setText("Teacher Name: " + teacher.getTeacherName());
             if (!teacher.getAvatarUrl().equals("")) {
                 Picasso.get().load(teacher.getAvatarUrl()).placeholder(R.drawable.avatar).into(binding.aboutImg);
             } else {

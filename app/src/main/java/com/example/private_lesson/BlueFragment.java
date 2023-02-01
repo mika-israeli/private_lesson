@@ -50,7 +50,7 @@ public class BlueFragment extends Fragment {
 
 
         if (title != null){
-            titleTv.setText(title);
+            titleTv.setText("");
         }
 
         View button = view.findViewById(R.id.bluefrag_back_btn);

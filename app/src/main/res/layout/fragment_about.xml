@@ -44,11 +44,12 @@
 
             <TextView
                 android:id="@+id/about_name"
-                android:layout_width="181dp"
-                android:layout_height="60dp"
+                android:layout_width="320dp"
+                android:layout_height="52dp"
                 android:layout_marginTop="48dp"
-
                 android:text="Name:"
+                android:gravity="center"
+                android:textColor="@color/teal_200"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
