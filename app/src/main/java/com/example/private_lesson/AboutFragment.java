@@ -67,7 +67,7 @@ public class AboutFragment extends Fragment {
         });
         binding.signOutBtn.setOnClickListener(v -> {
             Model.instance().getAuth().signOut();
-            Intent intent = new Intent(getActivity(), MainActivity.class);
+            Intent intent = new Intent(getActivity(), HomeActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             getActivity().finish();

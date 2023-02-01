@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/teacher"
     tools:context=".SignUpFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -29,12 +30,15 @@
 
     <Button
         android:id="@+id/signInb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="128dp"
+        android:layout_height="59dp"
+        android:text="sign in"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordSignIn"
-        tools:layout_editor_absoluteX="161dp"
+        app:layout_constraintVertical_bias="0.811"
         tools:ignore="MissingConstraints" />
 
 
