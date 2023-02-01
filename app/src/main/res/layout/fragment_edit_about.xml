@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddPostFragment">
+    tools:context=".EditAboutFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -58,9 +58,11 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editId"
+                android:id="@+id/profileId"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+
+
                 >
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -84,6 +86,29 @@
 
 
 
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp">
+                <!--                app:startIconDrawable="@drawable/ic_baseline_edit_calendar_24">-->
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp">
+                <!--                app:startIconDrawable="@drawable/ic_baseline_edit_calendar_24">-->
+
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -91,20 +116,14 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/saveBtn"
+                    android:id="@+id/saveButton"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:text="SAVE" />
 
-                <Button
-                    android:id="@+id/cancellBtn"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:text="CANCEL" />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>

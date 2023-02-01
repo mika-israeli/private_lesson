@@ -44,8 +44,10 @@ public class PostListFragment extends Fragment {
             public void onItemClick(int pos) {
                 Log.d("TAG", "Row was clicked " + pos);
                 Post post = viewModel.getData().getValue().get(pos);
+                String postId = post.id;
+                String userId = post.userId;
              PostListFragmentDirections.ActionPostListFragmentToBlueFragment action
-                        = PostListFragmentDirections.actionPostListFragmentToBlueFragment(post.teacherName + " " + post.description + " " + post.price + " " + post.id);
+                        = PostListFragmentDirections.actionPostListFragmentToBlueFragment(postId, userId);
                 Navigation.findNavController(view).navigate
                         (action);
             }

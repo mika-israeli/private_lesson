@@ -84,7 +84,7 @@ public class AboutFragment extends Fragment {
 
         binding.seeAllPostsBtn.setOnClickListener(v -> {
             //go to posts list fragment with the user id
-            NavDirections action = AboutFragmentDirections.actionAboutFragmentToTeacherPostListFragment(userId);
+            NavDirections action = AboutFragmentDirections.actionAboutFragmentToTeacherPostListFragment("1",userId);
             Navigation.findNavController(v).navigate(action);
         });
 

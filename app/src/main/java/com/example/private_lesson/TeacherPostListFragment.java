@@ -52,10 +52,10 @@ public class TeacherPostListFragment extends Fragment {
                 Log.d("TAG", "Row was clicked " + pos);
 
                 Post post = viewModel.getMyData(viewModel.getAllPosts().getValue(), userId).get(pos);
-//                TeacherPostListFragmentDirections.ActionTeacherPostListFragmentToBlueFragment action
-//                        = TeacherPostListFragmentDirections.actionTeacherPostListFragmentToBlueFragment(post.id);
-//                Navigation.findNavController(view).navigate
-//                        (action);
+                TeacherPostListFragmentDirections.ActionTeacherPostListFragmentToBlueFragment action
+                        = TeacherPostListFragmentDirections.actionTeacherPostListFragmentToBlueFragment("hey",post.id);
+                Navigation.findNavController(view).navigate
+                        (action);
 //
             }
 
