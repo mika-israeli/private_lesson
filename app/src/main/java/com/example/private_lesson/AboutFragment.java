@@ -83,50 +83,15 @@ public class AboutFragment extends Fragment {
         });
 
         binding.seeAllPostsBtn.setOnClickListener(v -> {
-
-            //go to editabout fragment with the user id
+            //go to posts list fragment with the user id
             NavDirections action = AboutFragmentDirections.actionAboutFragmentToTeacherPostListFragment(userId);
             Navigation.findNavController(v).navigate(action);
-
-
         });
+
+
 
         return view;
     }
-}   // Path: app/src/main/java/com/example/private_lesson/AboutFragment.java
-//Model.instance().refreshAllPosts();
-//binding.recyclerView.setHasFixedSize(true);
-//binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//adapter = new PostRecyclerAdapter(getLayoutInflater(),viewModel.getData().getValue());
-//binding.recyclerView.setAdapter(adapter);
-//
-//adapter.setOnItemClickListener(new PostRecyclerAdapter.OnItemClickListener() {
-//    @Override
-//    public void onItemClick(int position) {
-//        Post post = viewModel.getData().getValue().get(position);
-////        NavDirections action = AboutFragmentDirections.actionAboutFragmentToPostDetailsFragment(post);
-////        Navigation.findNavController(view).navigate(action);
-//    }
-//});
-//
-//viewModel.getData().observe(getViewLifecycleOwner(), posts -> {
-//    adapter.setData(posts);
-//});
-//
-//Model.instance().EventPostsListLoadingState.observe(getViewLifecycleOwner(), state -> {
-//    binding.swipeRefresh.setRefreshing(state== Model.LoadingState.LOADING);
-//
-//});
-//binding.swipeRefresh.setOnRefreshListener(this::loadPosts);
-//
-//
-//        return view;
-//    }
-//
-//
-//void loadPosts() {
-//    Model.instance().refreshAllPosts();
-//    }
-//}
+}
 
 

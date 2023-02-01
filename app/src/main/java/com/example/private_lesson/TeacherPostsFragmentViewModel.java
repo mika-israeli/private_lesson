@@ -11,14 +11,24 @@ public class TeacherPostsFragmentViewModel extends ViewModel {
         private LiveData<List<Teacher>> teachers = Model.instance().getAllTeachers();
 
 
+
+    private LiveData<List<Post>> allPosts = Model.instance().getAllPosts();
+
+
     List<Post> getMyData(List<Post> l, String id) {
         return Model.instance().getMyPosts(l,id);
     }
 
-        LiveData<List<Teacher>> getData(){
+    Post getPostById(String id) {
+        return Model.instance().getPostById2(id,allPosts.getValue());
+    }
+
+        LiveData<List<Teacher>> getData()   {
             return teachers;
         }
-
+    public LiveData<List<Post>> getAllPosts() {
+        return allPosts;
+    }
 
 
 

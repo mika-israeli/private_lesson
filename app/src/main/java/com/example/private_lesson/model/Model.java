@@ -100,6 +100,31 @@ public class Model {
 
 
     }
+    public void refreshAllMyPosts() {
+        EventTeachersListLoadingState.setValue(LoadingState.LOADING);
+        Long localLocalLastUpdate = Teacher.getLocalLastUpdate();
+        firebaseModel.getAllPostsSince(localLocalLastUpdate,List->{
+            executor.execute(()->{
+                Log.d("TAG", "firebase return: "+List.size());
+                Long time=localLocalLastUpdate;
+                for(Post post:List){
+                    localDb.postDao().insertAll(post);
+                    if(time<post.getLastUpdated()){
+                        time=post.getLastUpdated();
+                    }
+                }
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                Post.setLocalLastUpdate(time);
+                EventPostsListLoadingState.postValue(LoadingState.NOT_LOADING);
+            });
+        });
+
+
+    }
     public void refreshAllTeachers() {
         EventTeachersListLoadingState.setValue(LoadingState.LOADING);
         Long localLocalLastUpdate = Teacher.getLocalLastUpdate();
@@ -175,6 +200,18 @@ public class Model {
                     });
                 }
         );
+    }
+
+    public Post getPostById2(String id, List<Post> list) {
+           for(Post p:list)
+            {
+                if(p.getId().equals(id))
+                {
+                    return p;
+                }
+            }
+           return null;
+
     }
 
     public LiveData<List<Post>> getAllPostsByTeacher() {

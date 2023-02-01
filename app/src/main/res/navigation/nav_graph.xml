@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_postListFragment_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <argument
+            android:name="userID"
+            app:argType="string" />
+        <argument
+            android:name="postID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/blueFragment"
@@ -24,6 +30,9 @@
         tools:layout="@layout/fragment_blue" >
         <argument
             android:name="blueTitle"
+            app:argType="string" />
+        <argument
+            android:name="postID"
             app:argType="string" />
     </fragment>
     <fragment
@@ -47,6 +56,7 @@
         <action
             android:id="@+id/action_aboutFragment_to_teacherPostListFragment"
             app:destination="@id/teacherPostListFragment" />
+
 
 
     </fragment>
@@ -80,5 +90,15 @@
         android:id="@+id/teacherPostListFragment"
         android:name="com.example.private_lesson.TeacherPostListFragment"
         android:label="fragment_teacher_post_list"
-        tools:layout="@layout/fragment_teacher_post_list" />
+        tools:layout="@layout/fragment_teacher_post_list">
+        <action
+            android:id="@+id/action_teacherPostListFragment_to_blueFragment"
+            app:destination="@id/blueFragment" />
+        <argument
+            android:name="postID"
+            app:argType="string" />
+    <argument
+        android:name="userId"
+        app:argType="string" />
+    </fragment>
 </navigation>
