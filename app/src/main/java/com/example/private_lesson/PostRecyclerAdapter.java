@@ -23,7 +23,8 @@ class PostViewHolder extends RecyclerView.ViewHolder{
     CheckBox cb;
     List<Post> data;
     ImageView avatarImage;
-    public PostViewHolder(@NonNull View itemView, PostRecyclerAdapter.OnItemClickListener listener, List<Post> data) {
+    public PostViewHolder(@NonNull View itemView, PostRecyclerAdapter.OnItemClickListener
+            listener, List<Post> data) {
         super(itemView);
         this.data = data;
         nameTv = itemView.findViewById(R.id.postlistrow_name_tv);

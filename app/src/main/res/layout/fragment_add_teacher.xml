@@ -26,11 +26,10 @@
                     android:id="@+id/avatarImg"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    android:layout_marginTop="8dp"
-                    android:scaleType="fitStart"
-                    app:srcCompat="@drawable/avatar"
                     android:layout_gravity="center"
-                    />
+                    android:layout_marginTop="8dp"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/avatar" />
 
                 <ImageButton
                     android:id="@+id/galleryButton"

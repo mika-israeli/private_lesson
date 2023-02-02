@@ -30,4 +30,30 @@ import java.util.List;
 
 public class ApiFragment extends Fragment {
 
+    FragmentApiBinding binding;
+    ApiRecyclerAdapter adapter;
+
+    ApiViewModelFragment viewModel;
+
+
+    @Nullable
+    public View onCreateView( LayoutInflater inflater,  ViewGroup container,  Bundle savedInstanceState) {
+        binding = FragmentApiBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        binding.recyclerView.setHasFixedSize(true);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new ApiRecyclerAdapter(getLayoutInflater(),viewModel.getData().getValue());
+        binding.recyclerView.setAdapter(adapter);
+        viewModel.getData().observe(getViewLifecycleOwner(), data -> {
+            adapter.setData(data);
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        viewModel = new ViewModelProvider(this).get(ApiViewModelFragment.class);
+    }
 }

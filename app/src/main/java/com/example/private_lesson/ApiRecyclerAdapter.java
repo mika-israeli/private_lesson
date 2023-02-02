@@ -1,94 +1,116 @@
 package com.example.private_lesson;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.private_lesson.model.Education;
-import com.example.private_lesson.model.Post;
+import com.google.protobuf.Api;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class ApiRecyclerAdapter RecyclerView.ViewHolder{
+ class ApiViewHolder extends RecyclerView.ViewHolder {
 
-        TextView title;
-        TextView year;
-        TextView imdbID;
-        TextView type;
-        ImageView poster;
-        List<Education> data;
+    TextView title;
+    TextView year;
+    TextView type;
+    TextView imdbID;
+    List<Education> educationList;
+    ImageView poster;
 
 
-public EducationViewHolder(@NonNull View itemView,ApiRecyclerAdapter.OnItemClickListener listener,List<Education> data){
+    public ApiViewHolder(@NonNull View itemView, ApiRecyclerAdapter.OnItemClickListener listener,
+                         List<Education> educationList) {
         super(itemView);
-        this.data=data;
-        title=itemView.findViewById(R.id.title);
-        year=itemView.findViewById(R.id.year);
-        imdbID=itemView.findViewById(R.id.imdbID);
-        type=itemView.findViewById(R.id.type);
-        poster=itemView.findViewById(R.id.poster);
-        }
+        this.educationList = educationList;
+        title = itemView.findViewById(R.id.title);
+        year = itemView.findViewById(R.id.year);
+        type = itemView.findViewById(R.id.iddb);
+        imdbID = itemView.findViewById(R.id.type);
+        poster = itemView.findViewById(R.id.poster);
 
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int pos = getAdapterPosition();
+                listener.onItemClick(pos);
+            }
+        });
 
-public void bind(Education rd,int pos){
-        title.setText("title: "+rd.getTitle());
-        year.setText("year: "+rd.getYear());
-        imdbID.setText("imdbID: "+rd.getImdbID());
-        type.setText("type: "+rd.getType());
-        Picasso.get().load(rd.getPoster()).placeholder(R.drawable.avatar).into(poster);
-        Picasso.get().load(rd.getPoster).placeholder
-        (R.drawable.poster).into(poster);
-
-
-        }
-        }
-
-public class ApiViewHolder extends RecyclerView.Adapter<ApiViewHolder>{
-    OnItemClickListener listener;
-    public static interface OnItemClickListener{
-        void onItemClick(int pos);
     }
+
+    public void bind(Education education, int pos) {
+        title.setText("Movie Educatuon Title: " + education.getTitle());
+        year.setText("Movie Educatuon Year: " + education.getYear());
+        type.setText("Movie Educatuon Type: " + education.getType());
+        imdbID.setText("Movie Educatuon ID: " + education.getImdbID());
+        if (education.getPoster() != null && education.getPoster().length() > 0) {
+            Picasso.get().load(education.getPoster()).placeholder(R.drawable.avatar).into(poster);
+        } else {
+            poster.setImageResource(R.drawable.avatar);
+        }
+    }
+}
+
+
+
+    public class ApiRecyclerAdapter extends RecyclerView.Adapter<ApiViewHolder> {
+
+        OnItemClickListener listener;
+
+static interface OnItemClickListener {
+    void onItemClick(int pos);
+
+}
 
     LayoutInflater inflater;
-    List<Education> data;
-    public void setData(List<Education> data){
-        this.data = data;
-        notifyDataSetChanged();
-    }
-    public ApiRecyclerAdapter(LayoutInflater inflater, List<Education> data){
-        this.inflater = inflater;
-        this.data = data;
+    List<Education> educationList;
+
+    public void setData(List<Education> educationList) {
+        this.educationList = educationList;
+       notifyDataSetChanged();
     }
 
-    void setOnItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
+    public ApiRecyclerAdapter(LayoutInflater inflater, List<Education> educationList) {
+
+        this.inflater = inflater;
+        this.educationList = educationList;
     }
+
+    void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+
+    }
+
     @NonNull
     @Override
-    public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.post_list_row,parent,false);
-        return new PostViewHolder(view,listener, data);
+    public ApiViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = inflater.inflate(R.layout.education_row, parent, false);
+        return new ApiViewHolder(view, listener, educationList);
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
-        Post post = data.get(position);
-        holder.bind(post,position);
+    public void onBindViewHolder(@NonNull ApiViewHolder holder, int position) {
+
+        Education education = educationList.get(position);
+        holder.bind(education, position);
     }
 
     @Override
     public int getItemCount() {
-
-        if(data==null) {
+        if(educationList == null){
             return 0;
         }
-        return data.size();
+        return educationList.size();
     }
+
+
+
+
 }
+
+

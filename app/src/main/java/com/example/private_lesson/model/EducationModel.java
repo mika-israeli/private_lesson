@@ -21,7 +21,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class EducationModel {
 
-    final public static EducationModel instance = new EducationModel();
+    private final static EducationModel _instance = new EducationModel();
+    public static EducationModel instance(){
+        return _instance;
+    }
 
     final String BASE_URL = "https://www.omdbapi.com/";
     Retrofit retrofit;
