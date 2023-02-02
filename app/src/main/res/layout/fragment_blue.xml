@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D1D0E3"
+    android:backgroundTint="#eab676"
     tools:context=".BlueFragment">
 
     <!-- TODO: Update blank fragment layout -->
