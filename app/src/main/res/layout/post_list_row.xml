@@ -7,6 +7,15 @@
     android:textColor="@color/black"
     android:background="?attr/selectableItemBackground">
 
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageView
         android:id="@+id/postlistrow_avatar_img"
         android:layout_width="74dp"

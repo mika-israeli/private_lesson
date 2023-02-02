@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".PostListFragment">
 
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="0dp"
@@ -29,7 +30,6 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-
     <ImageButton
         android:id="@+id/btnAdd"
         android:layout_width="58dp"
@@ -50,6 +50,7 @@
         app:layout_constraintEnd_toEndOf="@+id/swipeRefresh"
         app:layout_constraintStart_toStartOf="@+id/swipeRefresh"
         app:layout_constraintTop_toTopOf="@+id/swipeRefresh" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

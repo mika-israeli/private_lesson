@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.private_lesson.HomeFragment"
-        android:label="fragment_home"
+        android:label="Sign In or Sign Up"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_signInFragment"
@@ -20,12 +20,12 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.private_lesson.SignInFragment"
-        android:label="fragment_sign_in"
+        android:label="Sign In "
         tools:layout="@layout/fragment_sign_in" />
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.example.private_lesson.SignUpFragment"
-        android:label="fragment_sign_up"
+        android:label="Sign Up"
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_addTeacherFragment"
@@ -34,6 +34,6 @@
     <fragment
         android:id="@+id/addTeacherFragment"
         android:name="com.example.private_lesson.AddTeacherFragment"
-        android:label="fragment_add_teacher"
+        android:label="Add Your Details"
         tools:layout="@layout/fragment_add_teacher" />
 </navigation>

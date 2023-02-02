@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/postListFragment"
         android:name="com.example.private_lesson.PostListFragment"
-        android:label="Search teacher"
+        android:label="All the lessons"
         tools:layout="@layout/fragment_post_list">
         <action
             android:id="@+id/action_postListFragment_to_blueFragment"
@@ -26,7 +26,7 @@
     <fragment
         android:id="@+id/blueFragment"
         android:name="com.example.private_lesson.BlueFragment"
-        android:label="fragment_blue"
+        android:label="About the lesson"
         tools:layout="@layout/fragment_blue" >
         <argument
             android:name="blueTitle"
@@ -68,7 +68,7 @@
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.private_lesson.SignInFragment"
-        android:label="fragment_log_in"
+        android:label="Log in"
         tools:layout="@layout/fragment_sign_in" >
         <action
             android:id="@+id/action_logInFragment_to_signUpFragment2"
@@ -80,12 +80,12 @@
     <fragment
         android:id="@+id/signUpFragment2"
         android:name="com.example.private_lesson.SignUpFragment"
-        android:label="fragment_sign_up"
+        android:label="Sign up"
         tools:layout="@layout/fragment_sign_up" />
     <fragment
         android:id="@+id/editAboutFragment"
         android:name="com.example.private_lesson.EditAboutFragment"
-        android:label="fragment_edit_about"
+        android:label="Edit Your Profile"
         tools:layout="@layout/fragment_edit_about" >
         <argument
             android:name="userId"
@@ -94,7 +94,7 @@
     <fragment
         android:id="@+id/teacherPostListFragment"
         android:name="com.example.private_lesson.TeacherPostListFragment"
-        android:label="fragment_teacher_post_list"
+        android:label="All Your Lessons"
         tools:layout="@layout/fragment_teacher_post_list">
         <action
             android:id="@+id/action_teacherPostListFragment_to_blueFragment"
@@ -109,7 +109,7 @@
     <fragment
         android:id="@+id/editPostFragment"
         android:name="com.example.private_lesson.EditPostFragment"
-        android:label="fragment_edit_post"
+        android:label="Edit Your Lesson"
         tools:layout="@layout/fragment_edit_post" >
         <argument
             android:name="postID"
@@ -118,6 +118,6 @@
     <fragment
         android:id="@+id/apiFragment"
         android:name="com.example.private_lesson.ApiFragment"
-        android:label="fragment_api"
+        android:label="Eduucation API"
         tools:layout="@layout/fragment_api" />
 </navigation>

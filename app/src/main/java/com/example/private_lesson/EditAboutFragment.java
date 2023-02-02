@@ -1,5 +1,6 @@
 package com.example.private_lesson;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
@@ -99,7 +100,11 @@ public class EditAboutFragment extends Fragment {
                         teacher.setAvatarUrl(url);
                     }
                     Model.instance().addTeacher(teacher, (unused) -> {
-                       Navigation.findNavController(view).navigateUp();
+//                       Navigation.findNavController(view).navigateUp();
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        getActivity().finish();
 
 
                     });
@@ -109,7 +114,11 @@ public class EditAboutFragment extends Fragment {
                 {
                     Model.instance().addTeacher(teacher, (unused) -> {
                         //back to profile and refresh
-                        Navigation.findNavController(view).navigateUp() ;
+//                        Navigation.findNavController(view).navigateUp() ;
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        getActivity().finish();
 
                     });
                 }

@@ -27,13 +27,25 @@ public class HomeActivity extends AppCompatActivity {
         navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController);
         FirebaseUser user = Model.instance().getAuth().getCurrentUser();
-        if (user != null) {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
-            finish();
+//        if (user != null) {
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            startActivity(intent);
+//            finish();
+//        }
+
+
+    }
+    int fragmentMenuId = 0;
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        if (item.getItemId() == android.R.id.home){
+            navController.popBackStack();
+        }else{
+            fragmentMenuId = item.getItemId();
+            return NavigationUI.onNavDestinationSelected(item,navController);
         }
-
-
+        return super.onOptionsItemSelected(item);
     }
 }

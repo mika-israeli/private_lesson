@@ -29,6 +29,7 @@ public class EditPostFragment extends Fragment {
     FragmentEditPostBinding binding;
     String postID;
     String userId;
+    String postIdNew;
     ActivityResultLauncher<Void> cameraLauncher;
     ActivityResultLauncher<String> galleryLauncher;
     Boolean isAvatarSelected = false;
@@ -69,9 +70,10 @@ public class EditPostFragment extends Fragment {
                              Bundle savedInstanceState) {
         userId = Model.instance().getAuth().getCurrentUser().getUid();
         postID = getArguments().getString("postID");
+        postIdNew = postID.substring(0, 28);
         Log.d("TAG", "onCreateView: " + postID.substring(0, 28));
         Log.d("TAG", "onCreateView: " + userId);
-          if(!postID.substring(0, 28).equals(userId)) {
+          if(!postIdNew.equals(userId)) {
             Toast.makeText(getContext(), "You can't edit this post", Toast.LENGTH_SHORT).show();
 
                 //return to blue fragment
@@ -105,11 +107,11 @@ public class EditPostFragment extends Fragment {
                 String name = binding.nameEt.getText().toString();
                 String desc = binding.descEt.getText().toString();
                 String price = binding.price.getText().toString();
-                Model.instance().deletePostFromF(postID, (unused) -> {
-                   Model.instance().refreshAllPosts();
-                    });
+//                Model.instance().deletePostFromF(postID, (unused) -> {
+//                   Model.instance().refreshAllPosts();
+//                    });
 
-                Post post = new Post(name, desc, price, userId, false, avatar, postID);
+                Post post = new Post(name, desc, price, postID, false, avatar, userId);
                 if (isAvatarSelected) {
                     binding.avatarImg.setDrawingCacheEnabled(true);
                     binding.avatarImg.buildDrawingCache();
@@ -119,14 +121,23 @@ public class EditPostFragment extends Fragment {
                             post.setAvatarUrl(url);
                         }
                         Model.instance().addPost(post, (unused) -> {
-                            Navigation.findNavController(view).navigateUp();
+//                            Navigation.findNavController(view).navigateUp();
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            startActivity(intent);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            getActivity().finish();
+
 
                         });
                     });
                 } else {
                     Model.instance().addPost(post, (unused) -> {
                         //back to profile and refresh
-                        Navigation.findNavController(view).navigateUp();
+//                        Navigation.findNavController(view).navigateUp();
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        getActivity().finish();
 
                     });
                 }
