@@ -8,7 +8,7 @@ import com.example.private_lesson.model.TeacherDao;
 
 
 
-@Database(entities = {Teacher.class,Post.class}, version =215)
+@Database(entities = {Teacher.class,Post.class}, version =218)
 abstract class AppLocalDbRepository extends RoomDatabase {
     public abstract PostDao postDao();
     public abstract TeacherDao teacherDao();
